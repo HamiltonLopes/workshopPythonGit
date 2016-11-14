@@ -1,3 +1,4 @@
+#coding:utf-8
 def arredondar(num):
     return float ( '%0.2f' %(num))
 def transformarByteEmMegaByte(bytes):
@@ -25,18 +26,17 @@ if __name__ == '__main__':
     texto = []
     texto.append('ACME Inc.                 Uso do espaço em disco pelos usuarios\n')
     texto.append('---------------------------------------------------------------\n')
-    texto.append('Nr.\tUsuário\tEspaço Utilizado\t% do uso\n\n')
+    texto.append('%-5s\t%-15s\t%-8s\t%8s\n\n' %('Nr.','Usuário','Espaço Utilizado','% do uso'))
 
     for i, value in enumerate(lista):
         if i%2 == 0:
-            texto.append('%d\t' % (int(i/2)+1))
-            texto.append(value + '\t')
+            texto.append('%-5d\t' % (int(i/2)+1))
+            texto.append('%-15s\t' %value)
         else:
-            texto.append('%0.2f%s\t' % (value, ' MB'))
-            texto.append('%0.2f%s\n' % ((value * 100) / sum(lista[1::2]), '%'))
+            texto.append('%8.2f%s\t' % (value, ' MB'))
+            texto.append('%15.2f%s\n' % ((value * 100) / sum(lista[1::2]), '%'))
 
     texto.append('\n%s %0.2f %s\n' %('Espaço total ocupado:', sum(lista[1::2]), 'MB'))
     texto.append('%s %0.2f %s\n' %('Espaço medio ocupado:', sum(lista[1::2])/len(lista[1::2]), 'MB'))
     arqR.writelines(texto)
     arqR.close()
-
